@@ -1,0 +1,38 @@
+<html ng-app="demoApp">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+	<script type="text/javascript">
+	var demoApp = angular.module('demoApp',[]);
+
+	var controllers = {};
+
+	<!-- create controller class -->
+	function SimpleController($scope){
+		$scope.customers = [
+				{name:'Terry.Cho',city:'Seoul'},
+				{name:'Cath',city:'Suwon'},
+				{name:'Carry',city:'Suwon'}
+		];
+	}
+
+	<!-- add the controller to controller array -->
+	controllers.SimpleController = SimpleController;
+	<!-- pass the controllers array to module -->
+	demoApp.controller(controllers);
+
+	</script>
+</head>
+<body>
+	<!-- not to define ng-controller to assign the controller. It needs a routing configuration -->
+	<div ng-controller="SimpleController">
+	
+ 		<h3> Controller example </h3>
+ 			
+ 		<ul>
+ 			<li ng-repeat="cust in customers | orderBy:'name' ">{{cust.name}}</li>
+ 		</ul>
+ 	</div>
+
+</body>
+</html>
