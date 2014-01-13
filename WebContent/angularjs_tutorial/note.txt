@@ -1,0 +1,11 @@
+Directive is attribute which is added in HTML tag
+for example
+<html ng-app> : ng-app is directive
+  <input type="xx" ng-mode="name"> : ng-model is directive
+thr directive is started from "ng-"
+
+* ng-model : binding data model to html object
+* ng-repeat : iterate
+* ng-init : initialize data ex) <div class="container" ng-init="datas=['data1','data2'...]" />
+
+You can find more directive - http://docs.angularjs.org/api
