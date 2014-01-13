@@ -1,0 +1,25 @@
+<html ng-app>
+ <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+ </head>
+ <body>
+ 	<h3> simple data binding example </h3>
+ 	<input type="text" ng-model="name" name="myname"></input> {{name}}
+
+ 	<div class="cotainer"
+ 		ng-init="names=['Dave','Terry','Carry','Yuna','Cath']">
+ 		<h3> Repeater example </h3>
+ 		<ul>
+ 			<li ng-repeat="name in names">{{name | uppercase}}</li>
+ 		</ul>
+ 	</div>
+ 	<div class="repeater" ng-init="people=[{name:'Betty'},{name:'Terry'},{name:'Cath'},{name:'Aron'}]">
+ 			<h3> Sorting filter example </h3>
+ 			{{people}}
+ 		<ul>
+ 			<li ng-repeat="man in people | orderBy:'name' ">{{man.name}}</li>
+ 		</ul>
+ 	</div>
+ </body>
+<html>

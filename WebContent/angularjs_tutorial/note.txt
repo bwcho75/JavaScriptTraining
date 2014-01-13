@@ -1,3 +1,5 @@
+** Directives **
+
 Directive is attribute which is added in HTML tag
 for example
 <html ng-app> : ng-app is directive
@@ -9,3 +11,9 @@ thr directive is started from "ng-"
 * ng-init : initialize data ex) <div class="container" ng-init="datas=['data1','data2'...]" />
 
 You can find more directive - http://docs.angularjs.org/api
+
+** Filter **
+Filter is used to filtering data. So it is used with "data biniding" and it uses pipe "|"
+for example if user want to convert the text to upper character, uppercase filter can be usesed like this
+{{ name | uppercase}}
+The "uppercase" is filter
