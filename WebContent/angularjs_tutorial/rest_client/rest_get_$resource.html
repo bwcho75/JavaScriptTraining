@@ -17,12 +17,7 @@
 		jsonGetApp.controller("MsgCtrl",["$resource","$scope","$log",function($resource,$scope,$log){
 			$scope.$log=$log;
 			$scope.jsonmsg='';
-			var msgs = $resource('/msg',
-														'',
-														{
-															query:{method:'GET',isArray:false}
-														}
-														);
+			var msgs = $resource('/msg','',{query:{method:'GET',isArray:false}});
 			
 			$scope.sendJson = function(){
 				$log.info('sendJson has been called');
