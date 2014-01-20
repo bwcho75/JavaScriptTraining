@@ -1,0 +1,52 @@
+<!--
+	Json client with HTTP 
+-->
+<html ng-app='myApp'>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+
+		app.controller("MsgCtrl",["$scope","$log","$http",function($scope,$log,$http){
+			
+			$scope.msgGet = function(){
+					$http({method:'GET',url:'/msg'})
+					.success(function(data,status,headers,config){
+						$log.info('Get Json has been called');
+						var result = data;
+						$scope.jsonmsg = data;
+						$log.info('Return :'+result);
+					})
+					.error(function(data,status,headers,config){
+						$log.error('Get error');
+					});
+			};
+			
+			$scope.msgSnd = function(jsondata){
+					$http({method:'POST',url:'/msg',data:jsondata})
+					.success(function(data,status,headers,config){
+						$log.info('Send Json has been called');
+						$log.info('Send :'+jsondata);
+						$scope.jsonmsg = data;
+						$log.info('Return :'+data);
+					})
+					.error(function(data,status,headers,config){
+						$log.error('Get error');
+					});
+					
+			};
+			
+		}]);
+
+	</script>
+</head>
+<body>
+	<div ng-controller="MsgCtrl">
+		<textarea rows="5" style="width: 100%" ng-model="jsonmsg" ></textarea>
+		<button ng-click="msgGet();">Get JSON</button>
+		<button ng-click="msgSnd(jsonmsg);">Send JSON</button>
+		{{jsonmsg}}
+	</div>
+</body>
+</html>
