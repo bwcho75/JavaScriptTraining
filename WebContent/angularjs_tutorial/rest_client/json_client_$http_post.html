@@ -1,0 +1,54 @@
+<!--
+	Json POST client with $HTTP
+	Very simple example for posting JSON request to server with POST.
+	It reads number of fields from HTML forms and generate JSON object.
+	and then send it to serer.  
+-->
+<html ng-app='myApp'>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+
+		app.controller("WriteCtrl",["$scope","$log","$http","$filter",function($scope,$log,$http,$filter){
+			
+			$scope.msgSnd = function(userid,username,contents){
+					// Initialize Json message object
+					var jsonMsg = {};
+					var response;
+					$log.info("## Send json message has been called");
+					
+					jsonMsg.userid = userid;
+					if(username != null) jsonMsg.username = username;
+					if(contents != null) jsonMsg.contents = contents;
+					
+					//$ filter has been used to convert json object to string
+					$log.info("Json message has been created and send to server:"+$filter('json')(jsonMsg));
+
+					// call REST service by using HTTP/POST+JSON
+					$http({method:'POST',url:'/msg',data:jsonMsg})
+						.success(function(data,status,headers,config){
+							response = data;
+							$log.info("Get response message :"+$filter('json')(response));
+						}).error(function(data,status,headers,config){
+							$log.error("Error :"+status);
+						});
+						
+			};
+			
+		}]);
+
+	</script>
+</head>
+<body>
+	<div ng-controller="WriteCtrl">
+		ID : <input type="text" name="userid" ng-model="userid" >
+		NAME <input type="text" name="username" ng-model="username">
+		<br>	
+		<textarea rows="5" style="width: 100%" ng-model="contents" ></textarea>
+		<button ng-click="msgSnd(userid,username,contents);">Send JSON</button>
+		{{jsonmsg}}
+	</div>
+</body>
+</html>
